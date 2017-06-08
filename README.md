@@ -1,0 +1,2 @@
+# libselinux
+Golang libselinux binding
