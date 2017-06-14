@@ -1,0 +1,32 @@
+GENERATOR:
+  PackageName: libselinux
+  PackageDescription: "Libselinux provides bidings to SELinux configs"
+  PackageLicense: "MIT"
+  PkgConfigOpts: ["libselinux"]
+  Includes: ["selinux/selinux.h"]
+  Options:
+    SafeStrings: true
+PARSER:
+  IncludePaths: ["/usr/include", "/usr/lib/gcc/x86_64-redhat-linux/4.8.2/include/", "/usr/lib/gcc/x86_64-pc-linux-gnu/7.1.1/include/"]
+  SourcesPaths: ["selinux/selinux.h"]
+TRANSLATOR:
+  ConstRules:
+    defines: eval
+    enum: cgo
+  Rules:
+    global:
+      - {action: accept, from: "^security_(get|set)enforce$"}
+      - {action: accept, from: "^setfilecon$"}
+      - {action: accept, from: "^getfilecon$"}
+      - {action: accept, from: "^freecon$"}
+      - {action: accept, from: "^matchpathcon$"}
+      - {action: accept, from: "^matchpathcon_fini$"}
+      - {action: accept, from: "^selinux_getpolicytype$"}
+      - {action: accept, from: "^security_policyvers$"}
+      - {action: accept, from: "^security_get_boolean_names$"}
+      - {action: accept, from: "^security_get_boolean_active$"}
+      - {action: accept, from: "^security_get_boolean_pending$"}
+      - {action: accept, from: "^security_set_boolean_list$"}
+      - {action: accept, from: "^SELboolean$"}
+      - {action: accept, from: "^NewSELbooleanRef$"}
+      - {transform: export}
